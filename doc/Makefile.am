@@ -1,5 +1,5 @@
 ## Process this file with automake to produce Makefile.in
-## $Id$
+## $Id: Makefile.am,v 1.1 2003/05/10 09:25:12 ahsu Exp $
 
 man_MANS = vc.3
-EXTRA_DIST = $(man_MANS)
+EXTRA_DIST = rfc2426.txt
