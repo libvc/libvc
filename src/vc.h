@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: vc.h,v 1.2 2003/05/12 10:11:23 ahsu Exp $
+ * $Id: vc.h,v 1.3 2003/05/13 06:09:19 ahsu Exp $
  */
 
 #ifndef __VC_H
@@ -67,8 +67,6 @@ extern "C"
                                          const char *name);
   vc_component_param *vc_param_set_value (vc_component_param * vc_param,
                                           const char *value);
-  vc_component_param *vc_param_set_str (vc_component_param * vc_param,
-                                        const char *str);
   vc_component_param *vc_param_link (vc_component_param * head,
                                      vc_component_param * tail);
 

@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: vc.c,v 1.1 2003/05/10 09:26:54 ahsu Exp $
+ * $Id: vc.c,v 1.2 2003/05/13 06:09:19 ahsu Exp $
  */
 
 
@@ -40,7 +40,6 @@ struct vc_component_tag
 
 struct vc_component_param_tag
 {
-  char *str;
   char *name;
   char *value;
   vc_component_param *next;
@@ -419,7 +418,6 @@ vc_param_new ()
     }
   else
     {
-      new_vc_param->str = NULL;
       new_vc_param->name = NULL;
       new_vc_param->value = NULL;
       new_vc_param->next = NULL;
@@ -459,24 +457,6 @@ vc_param_set_value (vc_component_param * vc_param, const char *value)
     {
       free (vc_param->value);
       vc_param->value = strdup (value);
-    }
-
-  return vc_param;
-}
-
-/***************************************************************************
-    Sets the str of a vc_component_param by making a copy of
-    the given value.  Does nothing if the given vc_component_param
-    is NULL.  Returns the given vc_component_param.
- */
-
-vc_component_param *
-vc_param_set_str (vc_component_param * vc_param, const char *str)
-{
-  if (NULL != vc_param)
-    {
-      free (vc_param->str);
-      vc_param->str = strdup (str);
     }
 
   return vc_param;
@@ -742,7 +722,6 @@ vc_param_delete (vc_component_param * vc_param)
 {
   if (NULL != vc_param)
     {
-      free (vc_param->str);
       free (vc_param->name);
       free (vc_param->value);
       free (vc_param);
@@ -785,14 +764,10 @@ fprintf_vc_component_param (FILE * fp, vc_component_param * vc_param)
 
   tmp_vc_param = vc_param;
 
-  while (NULL != tmp_vc_param)
+  for (tmp_vc_param = vc_param; NULL != tmp_vc_param;
+       tmp_vc_param = vc_param_get_next (tmp_vc_param))
     {
-      if (NULL != tmp_vc_param->str)
-        {
-          fprintf (fp, ";%s", tmp_vc_param->str);
-        }
-
-      tmp_vc_param = tmp_vc_param->next;
+      fprintf (fp, ";%s=%s", tmp_vc_param->name, tmp_vc_param->value);
     }
 }
 
