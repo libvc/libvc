@@ -1,10 +1,10 @@
 libvc 003 (2003-06-14)
 
-* Properly parses vCard version 2.1 files.  This means that Microsoft
-vCard files can now be read in correctly and parsed.
+* Properly parses vCard version 2.1 files.  This means Microsoft
+vCard files can now be properly parsed as well.
 
-* Searching and comparisons to the type names and parameter names
-are now case insensitive.
+* Searching and comparing type names and parameter names are now
+case insensitive.
 
 * The build now produces shared libraries as well as static libraries.
 
