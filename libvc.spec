@@ -1,7 +1,7 @@
 # RPM spec file for Red Hat Linux
 # rename this file to libvc.spec before doing a make dist if you want
 # the resultant tar.gz for creating Red Hat RPMs.
-# $Id: libvc.spec_rh,v 1.1 2003/05/15 01:37:24 ahsu Exp $
+# $Id: libvc.spec_rh,v 1.2 2003/05/15 04:59:41 ahsu Exp $
 Summary: A vCard library.
 Name: libvc
 Version: 002
