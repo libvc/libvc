@@ -2,4 +2,11 @@
 
 * Create a user's guide or tutorial.
 
-* Add functions for retrieving preferred ADR and LABEL.
+* Create a generic "get preferred" function that accepts a type a
+parameter.  This function can then be used to retrieve the preferred
+EMAIL, TEL, ADR, LABEL, and possibly URL.
+
+* Have the type name, param name, and param values all stuffed into
+the vc_component as lowercase-only values.  This will simplify the
+searching and comparison of these values and eliminate the need for
+strcasecmp in a lot of places.
