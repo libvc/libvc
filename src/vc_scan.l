@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: vc_scan.l,v 1.3 2003/02/28 03:17:00 ahsu Rel $
+ * $Id: vc_scan.l,v 1.1 2003/05/10 09:27:45 ahsu Rel $
  */
 
 %{
@@ -50,7 +50,7 @@ SAFE-CHAR       {WSP}|\x21|[\x23-\x2B]|[\x2D-\x39]|[\x3C-\x7E]|{NON-ASCII}
 VALUE-CHAR      {WSP}|{VCHAR}|{NON-ASCII}
 
 %option noyywrap
-%x SC_PARAM SC_VALUE
+%x SC_VALUE SC_PARAM SC_PARAM_VALUE
 
 %%
 
@@ -60,28 +60,28 @@ VALUE-CHAR      {WSP}|{VCHAR}|{NON-ASCII}
 "."                       { yylval = NULL; return yytext[0]; }
 ({ALPHA}|{DIGIT}|-)+/"."  { yylval = yytext; return TOK_GROUP; }
 ({ALPHA}|{DIGIT}|-)+      { yylval = yytext; return TOK_NAME; }
-";"                       { yylval = NULL;
-                            BEGIN(SC_PARAM);
-                            return yytext[0]; }
-":"                       { yylval = NULL;
-                            BEGIN(SC_VALUE);
-                            return yytext[0]; }
+";"                       { yylval = NULL; BEGIN(SC_PARAM); return yytext[0]; }
+":"                       { yylval = NULL; BEGIN(SC_VALUE); return yytext[0]; }
 
 <SC_VALUE>
 {
 {VALUE-CHAR}*             { yylval = yytext; return TOK_VALUE; }
-"\n"                      { yylval = NULL;
-                            BEGIN(INITIAL);
-                            return yytext[0]; }
+"\n"                      { yylval = NULL; BEGIN(INITIAL); return yytext[0]; }
 }
 
 <SC_PARAM>
 {
-({SAFE-CHAR}|",")*        { yylval = yytext; return TOK_PARAM; }
-";"                       { yylval = NULL; return yytext[0]; }
-":"                       { yylval = NULL;
-                            BEGIN(SC_VALUE);
+{ALPHA}*                  { yylval = yytext; return TOK_PARAM_NAME; }
+"="                       { yylval = NULL; BEGIN(SC_PARAM_VALUE);
                             return yytext[0]; }
+}
+
+<SC_PARAM_VALUE>
+{
+{ALPHA}*                  { yylval = yytext; return TOK_PARAM_VALUE; }
+","                       { yylval = NULL; return yytext[0]; }
+";"                       { yylval = NULL; BEGIN(SC_PARAM); return yytext[0]; }
+":"                       { yylval = NULL; BEGIN(SC_VALUE); return yytext[0]; }
 }
 
 %%
