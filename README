@@ -3,7 +3,7 @@ release 001
 
 Copyright (C) 2003  Andrew Hsu
 
-This vCard library was written usinG `flex' and `bison'.  The library
+This vCard library was written using `flex' and `bison'.  The library
 handles scanning a vCard file, parsing the vCard file into a data
 storage structure, manipulating the data storage structure, and
 writing back to file.  It was originally written for `rolo', but
