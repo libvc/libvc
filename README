@@ -3,6 +3,17 @@ release 001
 
 Copyright (C) 2003  Andrew Hsu
 
+This vCard library was written usinG `flex' and `bison'.  The library
+handles scanning a vCard file, parsing the vCard file into a data
+storage structure, manipulating the data storage structure, and
+writing back to file.  It was originally written for `rolo', but
+has been split-off as a generic library for general use.
+
+Directory contents:
+
+  doc/ ...... Documentation for libvc.
+  src/ ...... Source code of libvc.
+
 This software is maintained on SourceForge:
 http://rolo.sf.net/
 
