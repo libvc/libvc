@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: vc_scan.l,v 1.2 2003/05/15 03:45:01 ahsu Rel $
+ * $Id: vc_scan.l,v 1.3 2003/06/04 10:53:59 ahsu Exp $
  */
 
 %{
@@ -32,6 +32,7 @@
     result = (c == EOF) ? YY_NULL : (buf[0] = c, 1); \
     }
 
+/* TODO: clean up the token definitions to match the rfc */
 %}
 
 ALPHA           [\x41-\x5A\x61-\x7A]
@@ -71,7 +72,7 @@ VALUE-CHAR      {WSP}|{VCHAR}|{NON-ASCII}
 
 <SC_PARAM>
 {
-{ALPHA}*                  { yylval = yytext; return TOK_PARAM_NAME; }
+({ALPHA}|{DIGIT}|-)+      { yylval = yytext; return TOK_PARAM_NAME; }
 "="                       { yylval = NULL; BEGIN(SC_PARAM_VALUE);
                             return yytext[0]; }
 ";"                       { yylval = NULL; BEGIN(SC_PARAM); return yytext[0]; }
@@ -80,7 +81,7 @@ VALUE-CHAR      {WSP}|{VCHAR}|{NON-ASCII}
 
 <SC_PARAM_VALUE>
 {
-{ALPHA}*                  { yylval = yytext; return TOK_PARAM_VALUE; }
+{SAFE-CHAR}*              { yylval = yytext; return TOK_PARAM_VALUE; }
 ","                       { yylval = NULL; return yytext[0]; }
 ";"                       { yylval = NULL; BEGIN(SC_PARAM); return yytext[0]; }
 ":"                       { yylval = NULL; BEGIN(SC_VALUE); return yytext[0]; }
