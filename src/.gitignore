@@ -7,3 +7,6 @@ Makefile.in
 vc_parse.c
 vc_parse.h
 vc_scan.c
+.libs
+*.la
+*.lo
