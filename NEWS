@@ -1,3 +1,9 @@
-Libvc 001 (2003-05-10)
+libvc 001 (2003-05-12)
 
-*
+* Initial release.  This is the same vCard library that was built
+with previous releases of rolo.  However, all occurrences of `vcard_'
+have now been shortened to `vc_'.  Plus, the header file is now
+`vc.h' instead of `vcard.h'.  The next binary releases of rolo and
+mutt_vc_query will be built with libvc.  The next source releases
+of rolo and mutt_vc_query will have libvc as a dependency.  The
+vc(3) man page is not finished yet.
