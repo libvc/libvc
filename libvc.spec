@@ -1,8 +1,6 @@
 # RPM spec file for Red Hat Linux
-# rename this file to libvc.spec before doing a make dist if you want
-# the resultant tar.gz for creating Red Hat RPMs.
-# $Id: libvc.spec_rh,v 1.2 2003/05/15 04:59:41 ahsu Exp $
-Summary: A vCard library.
+# $Id: libvc.spec,v 1.1 2003/05/16 03:03:13 ahsu Exp $
+Summary: A vCard library with headers and static libs
 Name: libvc
 Version: 002
 Release: 1
@@ -13,20 +11,23 @@ Packager: Andrew Hsu <ahsu@users.sf.net>
 Distribution: Red Hat Linux
 Vendor: Andrew Hsu
 Group: Development/Libraries
+Prefix: /usr
 BuildRoot: %{_tmppath}/%{name}-buildroot
 
 %description
-This vCard library was written using flex and bison. The library
-handles scanning a vCard file, parsing the vCard file into a data
-storage structure, manipulating the data storage structure, and
-writing back to file. It was originally written for rolo, but has
-been split-off as a generic library for general use.
+This package contains headers and static libs for developing
+applications that access and manipulate vCards. This library was
+written using flex and bison. The library handles scanning a vCard
+file, parsing the vCard file into a data storage structure,
+manipulating the data storage structure, and writing back to file.
+It was originally written for rolo, but has been split-off as a
+generic library for general use.
 
 %prep
 %setup -q
 
 %build
-./configure --libdir=/usr/lib --includedir=/usr/include --mandir=/usr/share/man
+./configure --prefix=/usr --mandir=/usr/share/man
 make
 
 %install
@@ -38,7 +39,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root)
-%{_libdir}/libvc.a
-%{_includedir}/vc.h
+%{_libdir}/*.a
+%{_includedir}/*.h
 %{_mandir}/man3/vc.3*
-%doc AUTHORS COPYING ChangeLog INSTALL NEWS README THANKS
+%doc AUTHORS COPYING.LIB ChangeLog INSTALL NEWS README THANKS doc/rfc2426.txt
