@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: vc_parse.y,v 1.4 2003/04/25 11:29:51 ahsu Rel $
+ * $Id: vc_parse.y,v 1.1 2003/05/10 09:28:20 ahsu Rel $
  */
 
 %{
@@ -33,8 +33,9 @@ extern FILE *yyin;
 extern int yylex ();
 void yyerror (char *s);
 
-static vc_component *current_vcard;
-static vc_component *current_vc;
+vc_component *current_vcard = NULL;
+vc_component *current_vc = NULL;
+char *current_vc_param_name = NULL;
 
 %}
 
@@ -49,7 +50,8 @@ static vc_component *current_vc;
 %token TOK_END_VCARD
 %token TOK_GROUP
 %token TOK_NAME
-%token TOK_PARAM
+%token TOK_PARAM_NAME
+%token TOK_PARAM_VALUE
 %token TOK_VALUE
 
 %%
@@ -100,26 +102,28 @@ params        : ';' param
               | params ';' param
               ;
 
-param         : TOK_PARAM {
-                  vc_component_param *tmp_vc_param = NULL;
-                  char str[80];
-                  char *param_name = NULL;
-                  char *param_value = NULL;
-                  
-                  tmp_vc_param = vc_param_new ();
-                  vc_param_set_str (tmp_vc_param, $1);
-                  
-                  /* TODO: clean up parsing of parameters
-                   */ 
-                  strncpy (str, $1, 79);
-                  str[79] = '\0';
-                  param_name = strtok (str, "=");
-                  param_value = param_name + strlen(param_name) + 1;
-                  vc_param_set_name (tmp_vc_param, param_name);
-                  vc_param_set_value (tmp_vc_param, param_value);
-                  
-                  vc_add_param (current_vc, tmp_vc_param); }
+param         : TOK_PARAM_NAME {
+                  if (NULL != current_vc_param_name)
+                    {
+                      free (current_vc_param_name);
+                      current_vc_param_name = NULL;
+                    }
 
+                  current_vc_param_name = strdup ($1); }
+                '=' param_values
+              ;
+
+param_values  : param_value
+              | param_values ',' param_value
+              ;
+
+param_value   : TOK_PARAM_VALUE {
+                  vc_component_param *tmp_vc_param = NULL;
+
+                  tmp_vc_param = vc_param_new ();
+                  vc_param_set_name (tmp_vc_param, current_vc_param_name);
+                  vc_param_set_value (tmp_vc_param, $1);
+                  vc_add_param (current_vc, tmp_vc_param); }
               ;
 
 value         : TOK_VALUE { vc_set_value (current_vc, $1); }
