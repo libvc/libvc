@@ -1,12 +1,47 @@
 .\" Process this file with
-.\" groff -man -Tascii vcard.3
-.\" $Id$
-.Dd May 10, 2003
+.\" groff -man -Tascii vc.3
+.\" $Id: vc.3,v 1.1 2003/05/10 09:24:19 ahsu Exp $
+.Dd May 11, 2003
 .Os
 .Dt VC 3
 .Sh NAME
 .Nm vc_new ,
 .Nm vc_delete
+.Nm vc_set_group ,
+.Nm vc_set_name ,
+.Nm vc_set_param ,
+.Nm vc_set_value ,
+.Nm vc_link ,
+.Nm vc_append_with_name ,
+.Nm vc_is_preferred ,
+.Nm vc_get_preferred_tel ,
+.Nm vc_get_preferred_email ,
+.Nm vc_get_group ,
+.Nm vc_get_name ,
+.Nm vc_get_param ,
+.Nm vc_get_value ,
+.Nm vc_param_new ,
+.Nm vc_param_set_name ,
+.Nm vc_param_set_value ,
+.Nm vc_param_set_str ,
+.Nm vc_param_link ,
+.Nm vc_param_get_name ,
+.Nm vc_param_get_value ,
+.Nm vc_get_next ,
+.Nm vc_get_next_by_name ,
+.Nm vc_param_get_next ,
+.Nm vc_param_get_by_name ,
+.Nm vc_param_get_next_by_name ,
+.Nm vc_delete ,
+.Nm vc_delete_deep ,
+.Nm vc_param_delete ,
+.Nm vc_param_delete_deep ,
+.Nm fprintf_vc_component_param ,
+.Nm fprintf_vc_component ,
+.Nm fprintf_vcard ,
+.Nm parse_vcard_file ,
+.Nm count_vcards ,
+.Nm get_val_struct_part
 .Nd vCard library
 .Sh LIBRARY
 .Lb libvc
@@ -16,12 +51,20 @@
 .Fn vc_new
 .Ft void
 .Fn vc_delete "vc_component *vc"
+.Ft vc_component *
+.Fn vc_set_group "vc_component *vc" "const char *group"
+.Ft vc_component *
+.Fn vc_set_name "vc_component *vc" "const char *name"
+.Ft vc_component *
+.Fn vc_set_param "vc_component *vc" "vc_component_param *vc_param"
+.Ft vc_component *
+.Fn vc_set_value "vc_component *vc" "const char *value"
 .Sh DESCRIPTION
 This is a library for vCard.
 .Pp
 .Sh SEE ALSO
 .Xr vc_new 3 ,
-.Xr vc_delete 3 ,
+.Xr vc_delete 3
 .Sh AUTHORS
 .An "Andrew Hsu" Aq ahsu@users.sf.net
 .Sh BUGS
