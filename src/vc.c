@@ -18,7 +18,7 @@
  *  Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
  *  MA  02111-1307  USA
  *
- *  $Id: vc.c,v 1.3 2003/05/15 03:50:01 ahsu Rel $
+ *  $Id: vc.c,v 1.4 2003/05/19 07:10:21 ahsu Exp $
  */
 
 
@@ -235,7 +235,7 @@ vc_is_preferred (vc_component * vc)
 
           if (NULL != value)
             {
-              if (0 == strcmp (value, "pref"))
+              if (0 == strcasecmp (value, "pref"))
                 {
                   ret_val = 1;
                   done = 1;
@@ -548,8 +548,6 @@ vc_get_next (const vc_component * vc)
     Searches for a vc_component that matches the given name,
     starting with the one after the given vc_component.  Returns
     NULL if none is found.
-
-    TODO: Change the strcmp in `vc_get_next_by_name' to be case insensitive.
  */
 
 vc_component *
@@ -566,7 +564,7 @@ vc_get_next_by_name (vc_component * vc, const char *name)
         {
           if (NULL != tmp_vc->name)
             {
-              if (0 == strcmp (name, tmp_vc->name))
+              if (0 == strcasecmp (name, tmp_vc->name))
                 {
                   result_vc = tmp_vc;
                   done = 1;
@@ -619,7 +617,7 @@ vc_param_get_by_name (vc_component_param * vc_param, const char *name)
         {
           if (NULL != tmp_vc_param->name)
             {
-              if (0 == strcmp (name, tmp_vc_param->name))
+              if (0 == strcasecmp (name, tmp_vc_param->name))
                 {
                   result_vc_param = tmp_vc_param;
                   done = 1;
@@ -638,7 +636,6 @@ vc_param_get_by_name (vc_component_param * vc_param, const char *name)
     Returns NULL if none is found.
 
     FIXME: lots of code duplicated from vc_param_get_by_name
-    TODO: make the strcmp case insensitive.
  */
 
 vc_component_param *
@@ -655,7 +652,7 @@ vc_param_get_next_by_name (vc_component_param * vc_param, const char *name)
         {
           if (NULL != tmp_vc_param->name)
             {
-              if (0 == strcmp (name, tmp_vc_param->name))
+              if (0 == strcasecmp (name, tmp_vc_param->name))
                 {
                   result_vc_param = tmp_vc_param;
                   done = 1;
@@ -840,7 +837,7 @@ count_vcards (FILE * fp)
 
   while (EOF != fscanf (fp, "%s\n", buf))
     {
-      if (0 == strcmp (buf, "BEGIN:VCARD"))
+      if (0 == strcasecmp (buf, "BEGIN:VCARD"))
         counter++;
     }
 
