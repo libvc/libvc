@@ -1,11 +1,11 @@
 # Process this file with autoconf to produce a configure script.
-# $Id: configure.ac,v 1.1 2003/05/10 09:22:20 ahsu Rel $
+# $Id: configure.ac,v 1.2 2003/05/15 04:59:41 ahsu Rel $
 
-AC_INIT(libvc, 002, ahsu@users.sf.net)
+AC_INIT(libvc, 003, ahsu@users.sf.net)
 AM_INIT_AUTOMAKE
 AC_PREREQ(2.57)
 AC_COPYRIGHT([Copyright (C) 2003  Andrew Hsu])
-AC_REVISION($Revision: 1.1 $)
+AC_REVISION($Revision: 1.2 $)
 AC_CONFIG_SRCDIR([src/vc.c])
 
 # Checks for programs.
@@ -24,7 +24,7 @@ AC_C_CONST
 
 # Checks for library functions.
 AC_FUNC_MALLOC
-AC_CHECK_FUNCS([strdup])
+AC_CHECK_FUNCS([strdup strcasecmp])
 
 AC_CONFIG_FILES([Makefile src/Makefile doc/Makefile])
 AC_OUTPUT
