@@ -1,22 +1,24 @@
 /*
- * libvc - vCard library
- * Copyright (C) 2003  Andrew Hsu
+ *  libvc - vCard library
+ *  Copyright (C) 2003  Andrew Hsu
  *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
+ *  This library is free software; you can redistribute it and/or
+ *  modify it under the terms of the GNU Lesser General Public
+ *  License as published by the Free Software Foundation; either
+ *  version 2.1 of the License, or (at your option) any later
+ *  version.
  *
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
+ *  This library is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU Lesser General Public License for more details.
  *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *  You should have received a copy of the GNU Lesser General Public
+ *  License along with this library; if not, write to the Free
+ *  Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+ *  MA  02111-1307  USA
  *
- * $Id: vc.c,v 1.2 2003/05/13 06:09:19 ahsu Exp $
+ *  $Id: vc.c,v 1.3 2003/05/15 03:50:01 ahsu Rel $
  */
 
 
@@ -249,12 +251,12 @@ vc_is_preferred (vc_component * vc)
     Returns the pointer to the name of the preferred telephone
     number of the given vc.  This is done by checking for `TYPE'
     parameters with a value of `pref'.  If no such parameter is
-    found, then the first vc_component with the name `TEL' will
-    be returned.  Returns NULL if none found.  Users of this function
+    found, then the first vc_component with the name `TEL' will be
+    returned.  Returns NULL if none found.  Users of this function
     must not modify the contents to which the returned pointer
     points to.
 
-    FIXME: lots of duplicate code with vc_get_preferred_email
+    TODO: Fix the duplicate code with vc_get_preferred_email.
  */
 
 char *
@@ -546,6 +548,8 @@ vc_get_next (const vc_component * vc)
     Searches for a vc_component that matches the given name,
     starting with the one after the given vc_component.  Returns
     NULL if none is found.
+
+    TODO: Change the strcmp in `vc_get_next_by_name' to be case insensitive.
  */
 
 vc_component *
@@ -634,6 +638,7 @@ vc_param_get_by_name (vc_component_param * vc_param, const char *name)
     Returns NULL if none is found.
 
     FIXME: lots of code duplicated from vc_param_get_by_name
+    TODO: make the strcmp case insensitive.
  */
 
 vc_component_param *
