@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: vc_scan.l,v 1.1 2003/05/10 09:27:45 ahsu Rel $
+ * $Id: vc_scan.l,v 1.2 2003/05/15 03:45:01 ahsu Rel $
  */
 
 %{
@@ -74,6 +74,8 @@ VALUE-CHAR      {WSP}|{VCHAR}|{NON-ASCII}
 {ALPHA}*                  { yylval = yytext; return TOK_PARAM_NAME; }
 "="                       { yylval = NULL; BEGIN(SC_PARAM_VALUE);
                             return yytext[0]; }
+";"                       { yylval = NULL; BEGIN(SC_PARAM); return yytext[0]; }
+":"                       { yylval = NULL; BEGIN(SC_VALUE); return yytext[0]; }
 }
 
 <SC_PARAM_VALUE>
