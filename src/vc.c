@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: vc.c,v 1.8 2003/04/25 11:29:13 ahsu Rel $
+ * $Id: vc.c,v 1.1 2003/05/10 09:26:54 ahsu Exp $
  */
 
 
@@ -830,11 +830,11 @@ fprintf_vc_component (FILE * fp, vc_component * vc)
  */
 
 void
-fprintf_vcard (FILE * fp, vc_component * vc)
+fprintf_vcard (FILE * fp, vc_component * vcard)
 {
   vc_component *vc = NULL;
 
-  vc = vc;
+  vc = vcard;
   if (NULL != vc)
     {
       fprintf (fp, "BEGIN:VCARD\n");

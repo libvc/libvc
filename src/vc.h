@@ -16,7 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: vc.h,v 1.1 2003/05/10 09:26:17 ahsu Exp $
+ * $Id: vc.h,v 1.2 2003/05/12 10:11:23 ahsu Exp $
  */
 
 #ifndef __VC_H
@@ -96,7 +96,7 @@ extern "C"
 /* printing functions */
   void fprintf_vc_component_param (FILE * fp, vc_component_param * vc_param);
   void fprintf_vc_component (FILE * fp, vc_component * vc);
-  void fprintf_vcard (FILE * fp, vc_component * vc);
+  void fprintf_vcard (FILE * fp, vc_component * vcard);
 
 /* parsing functions */
   vc_component *parse_vcard_file (FILE * fp);
