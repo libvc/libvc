@@ -1,5 +1,5 @@
 libvc - vCard library
-release 002
+release 003
 
 Copyright (C) 2003  Andrew Hsu
 
@@ -8,6 +8,9 @@ handles scanning a vCard file, parsing the vCard file into a data
 storage structure, manipulating the data storage structure, and
 writing back to file.  It was originally written for `rolo', but
 has been split-off as a generic library for general use.
+
+Shared libraries and static libraries are produced upon a successful
+build.
 
 Directory contents:
 
