@@ -1,11 +1,11 @@
 # Process this file with autoconf to produce a configure script.
-# $Id: configure.ac,v 1.2 2003/05/15 04:59:41 ahsu Rel $
+# $Id: configure.ac,v 1.3 2003/06/14 01:54:15 ahsu Rel $
 
-AC_INIT(libvc, 003, ahsu@users.sf.net)
+AC_INIT([libvc],[003],[ahsu@users.sf.net])
 AM_INIT_AUTOMAKE
-AC_PREREQ(2.57)
+AC_PREREQ(2.59)
 AC_COPYRIGHT([Copyright (C) 2003  Andrew Hsu])
-AC_REVISION($Revision: 1.2 $)
+AC_REVISION($Revision: 1.3 $)
 AC_CONFIG_SRCDIR([src/vc.c])
 
 # Checks for programs.
