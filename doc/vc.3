@@ -1,0 +1,28 @@
+.\" Process this file with
+.\" groff -man -Tascii vcard.3
+.\" $Id$
+.Dd May 10, 2003
+.Os
+.Dt VC 3
+.Sh NAME
+.Nm vc_new ,
+.Nm vc_delete
+.Nd vCard library
+.Sh LIBRARY
+.Lb libvc
+.Sh SYNOPSIS
+.In vc.h
+.Ft vc_component *
+.Fn vc_new
+.Ft void
+.Fn vc_delete "vc_component *vc"
+.Sh DESCRIPTION
+This is a library for vCard.
+.Pp
+.Sh SEE ALSO
+.Xr vc_new 3 ,
+.Xr vc_delete 3 ,
+.Sh AUTHORS
+.An "Andrew Hsu" Aq ahsu@users.sf.net
+.Sh BUGS
+Parsing parameters is not finished yet.
