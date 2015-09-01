@@ -23,14 +23,20 @@
 #define YYSTYPE char*
 #include "vc_parse.h"
 
-/****************************************************
-  to force flex to scan only one character at a time
- ****************************************************/
-#define YY_INPUT(buf,result,max_size) \
-    { \
-    int c = getc(yyin); \
-    result = (c == EOF) ? YY_NULL : (buf[0] = c, 1); \
-    }
+/**
+ * Two functions to enable only buffering one card at a time
+ */
+
+int chars_in_buffer()
+  {
+    return YY_CURRENT_BUFFER->yy_n_chars -
+           (yytext - YY_CURRENT_BUFFER->yy_ch_buf);
+  }
+
+void flush_buffer()
+  {
+    YY_FLUSH_BUFFER;
+  }
 
 /* TODO: clean up the token definitions to match the rfc */
 %}

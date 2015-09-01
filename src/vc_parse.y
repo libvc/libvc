@@ -33,6 +33,9 @@ extern FILE *yyin;
 extern int yylex ();
 void yyerror (char *s);
 
+extern long chars_in_buffer();
+extern void flush_buffer();
+
 vc_component *current_vcard = NULL;
 vc_component *current_vc = NULL;
 char *current_vc_param_name = NULL;
@@ -164,6 +167,9 @@ parse_vcard_file (FILE * fp)
     {
       vc = current_vcard;
     }
+  
+  fseek(yyin, -chars_in_buffer(), SEEK_CUR);
+  flush_buffer();
 
   return vc;
 }
