@@ -24,14 +24,23 @@
 #include "vc_parse.h"
 
 /**
- * Two functions to enable only buffering one card at a time
+ * Functions to enable only buffering one card at a time
  */
 
-int chars_in_buffer()
-  {
-    return YY_CURRENT_BUFFER->yy_n_chars -
-           (yytext - YY_CURRENT_BUFFER->yy_ch_buf);
-  }
+long *track_pos = NULL;
+
+void start_track_position(long *pos) {
+    track_pos = pos;
+}
+
+void stop_track_position() {
+    track_pos = NULL;
+}
+
+static void move_pos(char *read) {
+    if (track_pos != NULL)
+        *track_pos += strlen(read);
+}
 
 void flush_buffer()
   {
@@ -62,36 +71,75 @@ NAME-CHAR       [\x21-\x2B\x2D\x2F-\x39\x3C\x3E-\x5A\x5C\x5E-\x7E]
 
 %%
 
-"BEGIN:VCARD"             { yylval = NULL; return TOK_BEGIN_VCARD; }
-"END:VCARD"               { yylval = NULL; return TOK_END_VCARD; }
-"\n"                      { yylval = NULL; return yytext[0]; }
-"."                       { yylval = NULL; return yytext[0]; }
-({ALPHA}|{DIGIT}|-)+/"."  { yylval = yytext; return TOK_GROUP; }
-{NAME-CHAR}+              { yylval = yytext; return TOK_NAME; }
-";"                       { yylval = NULL; BEGIN(SC_PARAM); return yytext[0]; }
-":"                       { yylval = NULL; BEGIN(SC_VALUE); return yytext[0]; }
+"BEGIN:VCARD"             { move_pos("BEGIN:VCARD");
+                            yylval = NULL;
+                            return TOK_BEGIN_VCARD; }
+"END:VCARD"               { move_pos("END:VCARD");
+                            yylval = NULL;
+                            return TOK_END_VCARD; }
+"\n"                      { move_pos("\n"); yylval = NULL; return yytext[0]; }
+"."                       { move_pos("."); yylval = NULL; return yytext[0]; }
+({ALPHA}|{DIGIT}|-)+/"."  { move_pos(yytext);
+                            yylval = yytext;
+                            return TOK_GROUP; }
+{NAME-CHAR}+              { move_pos(yytext);
+                            yylval = yytext;
+                            return TOK_NAME; }
+";"                       { move_pos(";");
+                            yylval = NULL;
+                            BEGIN(SC_PARAM);
+                            return yytext[0]; }
+":"                       { move_pos(":");
+                            yylval = NULL;
+                            BEGIN(SC_VALUE);
+                            return yytext[0]; }
 
 <SC_VALUE>
 {
-({VALUE-CHAR}|"\n ")*     { yylval = yytext; return TOK_VALUE; }
-"\n"                      { yylval = NULL; BEGIN(INITIAL); return yytext[0]; }
+({VALUE-CHAR}|"\n ")*     { move_pos(yytext);
+                            yylval = yytext;
+                            return TOK_VALUE; }
+"\n"                      { move_pos("\n");
+                            yylval = NULL;
+                            BEGIN(INITIAL);
+                            return yytext[0]; }
 }
 
 <SC_PARAM>
 {
-({ALPHA}|{DIGIT}|-)+      { yylval = yytext; return TOK_PARAM_NAME; }
-"="                       { yylval = NULL; BEGIN(SC_PARAM_VALUE);
+({ALPHA}|{DIGIT}|-)+      { move_pos(yytext);
+                            yylval = yytext;
+                            return TOK_PARAM_NAME; }
+"="                       { move_pos("=");
+                            yylval = NULL;
+                            BEGIN(SC_PARAM_VALUE);
                             return yytext[0]; }
-";"                       { yylval = NULL; BEGIN(SC_PARAM); return yytext[0]; }
-":"                       { yylval = NULL; BEGIN(SC_VALUE); return yytext[0]; }
+";"                       { move_pos(";");
+                            yylval = NULL;
+                            BEGIN(SC_PARAM);
+                            return yytext[0]; }
+":"                       { move_pos(":");
+                            yylval = NULL;
+                            BEGIN(SC_VALUE);
+                            return yytext[0]; }
 }
 
 <SC_PARAM_VALUE>
 {
-{SAFE-CHAR}*              { yylval = yytext; return TOK_PARAM_VALUE; }
-","                       { yylval = NULL; return yytext[0]; }
-";"                       { yylval = NULL; BEGIN(SC_PARAM); return yytext[0]; }
-":"                       { yylval = NULL; BEGIN(SC_VALUE); return yytext[0]; }
+{SAFE-CHAR}*              { move_pos(yytext);
+                            yylval = yytext;
+                            return TOK_PARAM_VALUE; }
+","                       { move_pos(",");
+                            yylval = NULL;
+                            return yytext[0]; }
+";"                       { move_pos(";");
+                            yylval = NULL;
+                            BEGIN(SC_PARAM);
+                            return yytext[0]; }
+":"                       { move_pos(":");
+                            yylval = NULL;
+                            BEGIN(SC_VALUE);
+                            return yytext[0]; }
 }
 
 %%

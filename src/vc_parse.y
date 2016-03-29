@@ -98,7 +98,7 @@ group_contentline
 
 contentline
         : name params ':' value '\n'
-        | name ':' value '\n' 
+        | name ':' value '\n'
         ;
 
 name
@@ -160,15 +160,20 @@ vc_component *
 parse_vcard_file (FILE * fp)
 {
   vc_component *vc = NULL;
+  current_vcard = NULL;
 
   yyin = fp;
+
+  long pos = ftell(fp);
+  start_track_position(&pos);
 
   if (0 == yyparse ())
     {
       vc = current_vcard;
     }
-  
-  fseek(yyin, -chars_in_buffer(), SEEK_CUR);
+
+  fseek(yyin, pos, SEEK_SET);
+  stop_track_position();
   flush_buffer();
 
   return vc;
