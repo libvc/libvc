@@ -20,3 +20,6 @@ libtool
 ltmain.sh
 missing
 mkinstalldirs
+compile
+src/*.o
+ylwrap
