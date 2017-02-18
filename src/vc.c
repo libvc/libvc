@@ -25,6 +25,7 @@
 #include "vc.h"
 #include <stdlib.h>
 #include <string.h>
+#define __USE_GNU
 #include <stdio.h>
 
 #define BUF_LEN 80
@@ -832,14 +833,16 @@ fprintf_vcard (FILE * fp, vc_component * vcard)
 int
 count_vcards (FILE * fp)
 {
-  char buf[256];
+  char* line = NULL;
+  size_t len = 0;
   int counter = 0;
 
-  while (EOF != fscanf (fp, "%s\n", buf))
-    {
-      if (0 == strcasecmp (buf, "BEGIN:VCARD"))
-        counter++;
-    }
+  while (getline (&line, &len, fp) != EOF)
+    if (0 == strncasecmp (line, "BEGIN:VCARD", 11))
+      counter++;
+
+  if (line)
+      free (line);
 
   return counter;
 }
