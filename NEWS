@@ -1,3 +1,12 @@
+libvc 004 (2017-02-18)
+
+* Remove file doc/rfc2426.txt, which has non-free licensing
+conditions.
+
+* Accept fields with multiple-lines values.
+
+* Fix bug overflow bug (CVE-2006-1356)
+
 libvc 003 (2003-06-14)
 
 * Properly parses vCard version 2.1 files.  This means Microsoft
