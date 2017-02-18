@@ -2,6 +2,9 @@
 # $Id: configure.ac,v 1.3 2003/06/14 01:54:15 ahsu Rel $
 
 AC_INIT([libvc],[003],[ahsu@users.sf.net])
+LIBVC_ABI_VERSION=0:1:0
+AC_SUBST(LIBVC_ABI_VERSION)
+
 AM_INIT_AUTOMAKE
 AC_PREREQ(2.59)
 AC_COPYRIGHT([Copyright (C) 2003  Andrew Hsu])
