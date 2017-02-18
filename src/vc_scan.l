@@ -49,6 +49,7 @@ WSP             {SP}|{HTAB}
 NON-ASCII       [\x80-\xFF]
 SAFE-CHAR       {WSP}|\x21|[\x23-\x2B]|[\x2D-\x39]|[\x3C-\x7E]|{NON-ASCII}
 VALUE-CHAR      {WSP}|{VCHAR}|{NON-ASCII}
+NAME-CHAR       [\x21-\x2B\x2D\x2F-\x39\x3C\x3E-\x5A\x5C\x5E-\x7E]
 
 %option noyywrap
 %x SC_VALUE SC_PARAM SC_PARAM_VALUE
@@ -60,7 +61,7 @@ VALUE-CHAR      {WSP}|{VCHAR}|{NON-ASCII}
 "\n"                      { yylval = NULL; return yytext[0]; }
 "."                       { yylval = NULL; return yytext[0]; }
 ({ALPHA}|{DIGIT}|-)+/"."  { yylval = yytext; return TOK_GROUP; }
-({ALPHA}|{DIGIT}|-)+      { yylval = yytext; return TOK_NAME; }
+{NAME-CHAR}+              { yylval = yytext; return TOK_NAME; }
 ";"                       { yylval = NULL; BEGIN(SC_PARAM); return yytext[0]; }
 ":"                       { yylval = NULL; BEGIN(SC_VALUE); return yytext[0]; }
 
