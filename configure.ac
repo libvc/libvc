@@ -1,7 +1,7 @@
 # Process this file with autoconf to produce a configure script.
 # $Id: configure.ac,v 1.3 2003/06/14 01:54:15 ahsu Rel $
 
-AC_INIT([libvc],[004],[rafael@laboissiere.net])
+AC_INIT([libvc],[005],[rafael@laboissiere.net])
 LIBVC_ABI_VERSION=0:1:0
 AC_SUBST(LIBVC_ABI_VERSION)
 
