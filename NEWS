@@ -1,8 +1,6 @@
 libvc 005 (2017-02-19)
 
-* Add patches from Matthew Hague for improving parsing times of large
-vCards and for avoiding segfault caused when parse doesn't match
-anything.
+* Minor bug fixing release
 
 libvc 004 (2017-02-18)
 

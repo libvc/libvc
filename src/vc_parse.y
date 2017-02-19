@@ -33,9 +33,6 @@ extern FILE *yyin;
 extern int yylex ();
 void yyerror (char *s);
 
-extern long chars_in_buffer();
-extern void flush_buffer();
-
 vc_component *current_vcard = NULL;
 vc_component *current_vc = NULL;
 char *current_vc_param_name = NULL;
@@ -98,7 +95,7 @@ group_contentline
 
 contentline
         : name params ':' value '\n'
-        | name ':' value '\n'
+        | name ':' value '\n' 
         ;
 
 name
@@ -160,21 +157,13 @@ vc_component *
 parse_vcard_file (FILE * fp)
 {
   vc_component *vc = NULL;
-  current_vcard = NULL;
 
   yyin = fp;
-
-  long pos = ftell(fp);
-  start_track_position(&pos);
 
   if (0 == yyparse ())
     {
       vc = current_vcard;
     }
-
-  fseek(yyin, pos, SEEK_SET);
-  stop_track_position();
-  flush_buffer();
 
   return vc;
 }
