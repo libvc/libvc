@@ -34,3 +34,5 @@ and non-backward compatible way.
   libtoolize: Consider adding 'AC_CONFIG_MACRO_DIRS([m4])' to configure.ac,
   libtoolize: and rerunning libtoolize and aclocal.
   libtoolize: Consider adding '-I m4' to ACLOCAL_AMFLAGS in Makefile.am.
+
+* Consider removing the calls to exit() in function vc_new().
