@@ -25,3 +25,6 @@ This one is necessary for fixing segfault caused by the previous patch.
 
 The problem with this patches is that the ABI is changed in (probably)
 and non-backward compatible way.
+
+* When doing "make clean", remove the automatically generated files
+  src/vc_parse.c, src/vc_parse.h, and src/vc_scan.c.
