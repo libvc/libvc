@@ -1,3 +1,9 @@
+libvc 006 (2019-07-13)
+
+* Add unit tests
+* Do not install the RFC 2426 file
+* Fix doc-str-Lb-libvc macro in vc.3 man page
+
 libvc 005 (2017-02-19)
 
 * Minor bug fixing release
