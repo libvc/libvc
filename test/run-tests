@@ -1,0 +1,47 @@
+#!/bin/sh
+
+### Exit immediately if a command exits with a non-zero status
+set -e
+
+### Get the directory of this script
+CURDIR=$(dirname $0)
+
+### Include and library flags.  The values of these variables can be
+### overriden by the respective ones in the environment.
+INC=${INC:--I ../src}
+LIB=${LIB:-../src/.libs/libvc.a}
+
+### Define Compiler
+CC=${CC:-gcc}
+
+### Test header inclusion
+test_header_inclusion() {
+    src=$(tempfile --suffix .c)
+    cat <<EOF > $src
+#include <vc.h>
+EOF
+    $CC -E $INC $src > /dev/null
+    rm -f $src
+}
+
+### Test call to the function vc_new
+test_vc_new() {
+    src=$(tempfile --suffix .c)
+    cat <<EOF > $src
+#include <vc.h>
+
+int
+main ()
+{
+   vc_component *v;
+   v = vc_new ();
+}
+EOF
+    out=$(tempfile)
+    $CC -o $out $INC $src $LIB
+    $out
+    rm -f $src $out
+}
+
+### Launch the unit tests
+. shunit2

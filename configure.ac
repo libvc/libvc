@@ -20,6 +20,8 @@ AC_PROG_LIBTOOL
 
 # Checks for libraries.
 
+AC_CHECK_PROG(have_shunit2,shunit2,yes)
+AM_CONDITIONAL([HAVE_SHUNIT2], [test x$have_shunit2 = xyes])
 # Checks for header files.
 AC_HEADER_STDC
 
@@ -30,5 +32,5 @@ AC_C_CONST
 AC_FUNC_MALLOC
 AC_CHECK_FUNCS([strdup strcasecmp])
 
-AC_CONFIG_FILES([Makefile src/Makefile doc/Makefile])
+AC_CONFIG_FILES([Makefile src/Makefile doc/Makefile test/Makefile])
 AC_OUTPUT

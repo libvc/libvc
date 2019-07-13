@@ -24,3 +24,7 @@ compile
 src/*.o
 ylwrap
 INSTALL
+test-driver
+test-suite.log
+test/run-tests.log
+test/run-tests.trs
