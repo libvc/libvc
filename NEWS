@@ -1,3 +1,7 @@
+libvc 007 (2020-07-14)
+
+* Use mktemp instead of deprecated tempfile in unit tests
+
 libvc 006 (2019-07-13)
 
 * Add unit tests
