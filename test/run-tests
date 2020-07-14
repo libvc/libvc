@@ -16,7 +16,7 @@ CC=${CC:-gcc}
 
 ### Test header inclusion
 test_header_inclusion() {
-    src=$(tempfile --suffix .c)
+    src=$(mktemp --suffix .c)
     cat <<EOF > $src
 #include <vc.h>
 EOF
@@ -26,7 +26,7 @@ EOF
 
 ### Test call to the function vc_new
 test_vc_new() {
-    src=$(tempfile --suffix .c)
+    src=$(mktemp --suffix .c)
     cat <<EOF > $src
 #include <vc.h>
 
@@ -37,7 +37,7 @@ main ()
    v = vc_new ();
 }
 EOF
-    out=$(tempfile)
+    out=$(mktemp)
     $CC -o $out $INC $src $LIB
     $out
     rm -f $src $out
