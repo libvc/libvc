@@ -1,3 +1,8 @@
+libvc 008 (2021-01-30)
+
+* Properly parse multi-line values in MSDOS files, with line ending
+CRLF. Thanks to Adrian Edwards (MoralCode @ github) for the patch.
+
 libvc 007 (2020-07-14)
 
 * Use mktemp instead of deprecated tempfile in unit tests
