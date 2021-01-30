@@ -58,7 +58,7 @@ NAME-CHAR       [\x21-\x2B\x2D\x2F-\x39\x3C\x3E-\x5A\x5C\x5E-\x7E]
 
 "BEGIN:VCARD"             { yylval = NULL; return TOK_BEGIN_VCARD; }
 "END:VCARD"               { yylval = NULL; return TOK_END_VCARD; }
-"\n"                      { yylval = NULL; return yytext[0]; }
+{LF}                      { yylval = NULL; return yytext[0]; }
 "."                       { yylval = NULL; return yytext[0]; }
 ({ALPHA}|{DIGIT}|-)+/"."  { yylval = yytext; return TOK_GROUP; }
 {NAME-CHAR}+              { yylval = yytext; return TOK_NAME; }
@@ -67,8 +67,8 @@ NAME-CHAR       [\x21-\x2B\x2D\x2F-\x39\x3C\x3E-\x5A\x5C\x5E-\x7E]
 
 <SC_VALUE>
 {
-({VALUE-CHAR}|"\n "|"\r\n ")*     { yylval = yytext; return TOK_VALUE; }
-"\n"                      { yylval = NULL; BEGIN(INITIAL); return yytext[0]; }
+({VALUE-CHAR}|({CRLF}|{LF}){SP})*  { yylval = yytext; return TOK_VALUE; }
+{LF}                               { yylval = NULL; BEGIN(INITIAL); return yytext[0]; }
 }
 
 <SC_PARAM>
