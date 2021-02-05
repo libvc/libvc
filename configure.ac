@@ -13,6 +13,7 @@ AC_COPYRIGHT([Copyright (C) 2003  Andrew Hsu
 Copyright (C) 2017, 2019-2021 Rafael Laboissière])
 AC_REVISION($Revision: 1.3 $)
 AC_CONFIG_SRCDIR([src/vc.c])
+AC_CONFIG_MACRO_DIRS([m4])
 
 ### Checks for programs.
 AC_PROG_CC
