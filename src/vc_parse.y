@@ -39,11 +39,6 @@ char *current_vc_param_name = NULL;
 
 %}
 
-/*-----------------------
-   create a y.tab.h file
-  -----------------------*/
-%defines
-
 %start vcard
 
 %token TOK_BEGIN_VCARD
