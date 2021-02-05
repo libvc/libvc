@@ -1,3 +1,8 @@
+libvc 009 (2021-02-05)
+
+* Cope with libtoolize warnings regarding the m4 directory
+* src/vc_parse.y: Drop non yacc-compatible %defines directive
+
 libvc 008 (2021-01-30)
 
 * Properly parse multi-line values in MSDOS files, with line ending
