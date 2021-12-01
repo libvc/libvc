@@ -5,3 +5,4 @@ SUBDIRS = src doc test
 AUTOMAKE_OPTIONS = dist-bzip2
 EXTRA_DIST = depcomp libvc.spec
 ACLOCAL_AMFLAGS = -I m4
+CLEANFILES = ylwrap
