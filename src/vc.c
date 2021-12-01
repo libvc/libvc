@@ -30,6 +30,9 @@
 
 #define BUF_LEN 80
 
+/*** ERROR MESSAGE ***/
+static char* vc_last_error_message = NULL;
+
 /*** STRUCTS ***/
 
 struct vc_component_tag
@@ -51,6 +54,30 @@ struct vc_component_param_tag
 /*** FUNCTION DEFINITIONS ***/
 
 /***************************************************************************
+    Set/get the last error message
+ */
+
+void
+#if HAVE_VISIBILITY
+__attribute__((__visibility__("hidden")))
+#endif
+vc_set_error_message (char *err_msg)
+{
+  if (NULL != vc_last_error_message)
+    {
+      free (vc_last_error_message);
+    }
+  vc_last_error_message = (char *) malloc ((strlen (err_msg) + 1) * sizeof (char));
+  strcpy (vc_last_error_message, err_msg);
+}
+
+char *
+vc_get_error_message ()
+{
+  return vc_last_error_message;
+}
+
+/***************************************************************************
     Returns a new vc_component with everything set to NULL.  The
     user of the new vc_component will be responsible for freeing
     it in the future with a call to vc_delete or vc_delete_deep.
@@ -65,8 +92,8 @@ vc_new ()
 
   if (NULL == new_vc)
     {
-      fprintf (stderr, "unable to malloc a new vc_component\n");
-      exit (1);
+      vc_set_error_message ("unable to malloc a new vc_component");
+      return NULL;
     }
   else
     {
@@ -416,8 +443,8 @@ vc_param_new ()
 
   if (NULL == new_vc_param)
     {
-      fprintf (stderr, "unable to malloc a new vc_component_param\n");
-      exit (1);
+      vc_set_error_message ("unable to malloc a new vc_component_param");
+      return NULL;
     }
   else
     {

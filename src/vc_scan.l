@@ -22,6 +22,7 @@
 %{
 #define YYSTYPE char*
 #include "vc_parse.h"
+#include <setjmp.h>
 
 /****************************************************
   to force flex to scan only one character at a time
@@ -31,6 +32,21 @@
     int c = getc(yyin); \
     result = (c == EOF) ? YY_NULL : (buf[0] = c, 1); \
     }
+
+/****************************************
+  Recovery from fatal error in flex scan
+ ****************************************/
+#define YY_FATAL_ERROR(msg) vc_flex_fatal_error (msg);
+
+extern jmp_buf scan_recovery;
+extern void vc_set_error_message (char *);
+
+static void
+vc_flex_fatal_error (char *msg)
+{
+  vc_set_error_message (msg);
+  longjmp (scan_recovery, 1);
+}
 
 /* TODO: clean up the token definitions to match the rfc */
 %}

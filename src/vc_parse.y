@@ -25,6 +25,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <setjmp.h>
 
 #define YYSTYPE char*
 
@@ -36,6 +37,12 @@ void yyerror (char *s);
 vc_component *current_vcard = NULL;
 vc_component *current_vc = NULL;
 char *current_vc_param_name = NULL;
+
+jmp_buf
+#if HAVE_VISIBILITY
+__attribute__((__visibility__("hidden")))
+#endif
+scan_recovery;
 
 %}
 
@@ -155,10 +162,13 @@ parse_vcard_file (FILE * fp)
 
   yyin = fp;
 
-  if (0 == yyparse ())
-    {
-      vc = current_vcard;
-    }
+  if (!setjmp (scan_recovery))
+   {
+     if (0 == yyparse ())
+      {
+        vc = current_vcard;
+      }
+   }
 
   return vc;
 }

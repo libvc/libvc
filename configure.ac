@@ -3,7 +3,7 @@
 
 ### Versioning
 AC_INIT([libvc],[009],[rafael@laboissiere.net])
-LIBVC_ABI_VERSION=0:1:0
+LIBVC_ABI_VERSION=1:2:1
 AC_SUBST(LIBVC_ABI_VERSION)
 
 ### Main definitions
@@ -32,6 +32,10 @@ AC_C_CONST
 ### Checks for library functions.
 AC_FUNC_MALLOC
 AC_CHECK_FUNCS([strdup strcasecmp])
+
+### Checks for visibility suport
+m4_include([m4/visibility.m4])
+gl_VISIBILITY
 
 ### Output files
 AC_CONFIG_FILES([Makefile src/Makefile doc/Makefile test/Makefile])
