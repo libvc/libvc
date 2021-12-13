@@ -28,12 +28,22 @@
  * Functions to enable only buffering one card at a time
  */
 
-long *track_pos = NULL;
+long
+#if HAVE_VISIBILITY
+__attribute__((__visibility__("hidden")))
+#endif
+*track_pos = NULL;
 
+#if HAVE_VISIBILITY
+__attribute__((__visibility__("hidden")))
+#endif
 void start_track_position(long *pos) {
     track_pos = pos;
 }
 
+#if HAVE_VISIBILITY
+__attribute__((__visibility__("hidden")))
+#endif
 void stop_track_position() {
     track_pos = NULL;
 }
@@ -43,6 +53,9 @@ static void move_pos(char *read) {
         *track_pos += strlen(read);
 }
 
+#if HAVE_VISIBILITY
+__attribute__((__visibility__("hidden")))
+#endif
 void flush_buffer()
   {
     YY_FLUSH_BUFFER;
