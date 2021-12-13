@@ -2,8 +2,8 @@
 # $Id: configure.ac,v 1.3 2003/06/14 01:54:15 ahsu Rel $
 
 ### Versioning
-AC_INIT([libvc],[010],[rafael@laboissiere.net])
-LIBVC_ABI_VERSION=1:2:1
+AC_INIT([libvc],[011],[rafael@laboissiere.net])
+LIBVC_ABI_VERSION=1:3:1
 AC_SUBST(LIBVC_ABI_VERSION)
 
 ### Main definitions
