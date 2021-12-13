@@ -10,23 +10,3 @@ EMAIL, TEL, ADR, LABEL, and possibly URL.
 the vc_component as lowercase-only values.  This will simplify the
 searching and comparison of these values and eliminate the need for
 strcasecmp in a lot of places.
-
-* Consider applying the patches in the patches/ directory, which were
-taken from from https://github.com/yourealwaysbe/libvc:
-
-- https://github.com/yourealwaysbe/libvc/commit/5942b62db420781f3598ccc35b560bf66dc39965
-
-This one improves the parsing times of large vcards and has a
-significant impact.
-
-- https://github.com/yourealwaysbe/libvc/commit/d72dfdcf5722884a1fe79ea41343baa3673786a1
-
-This one is necessary for fixing segfault caused by the previous patch.
-
-The problem with this patches is that the ABI is changed in (probably)
-and non-backward compatible way.
-
-* When doing "make clean", remove the automatically generated files
-  src/vc_parse.c, src/vc_parse.h, and src/vc_scan.c.
-
-* Consider removing the calls to exit() in function vc_new().
