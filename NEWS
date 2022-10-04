@@ -1,3 +1,26 @@
+libvc 012 (2022-10-04)
+
+Avoid implicit declaration of functions
+
+libvc 011 (2021-13-12)
+
+* src/vc_scan.l: Hide visibility of non-api functions and variables
+
+* Fixed segfault causes by using current_vcard when parse doesn't
+match anything, changed file location tracking mechanism so that
+reading extra large vcards doesn't cause the parsing to fail early
+
+* Improve parsing times of large vcards
+
+libvc 010 (2021-01-12)
+
+* Do not call exit()
+
+* Port to Autoconf 2.71
+
+* Clean files that are removed by the clean target of the generated
+Makefiles
+
 libvc 009 (2021-02-05)
 
 * Cope with libtoolize warnings regarding the m4 directory
