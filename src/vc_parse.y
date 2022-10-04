@@ -37,6 +37,9 @@ void yyerror (char *s);
 extern long chars_in_buffer();
 extern void flush_buffer();
 
+extern void start_track_position(long *pos);
+extern void stop_track_position();
+
 vc_component *current_vcard = NULL;
 vc_component *current_vc = NULL;
 char *current_vc_param_name = NULL;
