@@ -2,7 +2,7 @@
 # $Id: configure.ac,v 1.3 2003/06/14 01:54:15 ahsu Rel $
 
 ### Versioning
-AC_INIT([libvc],[012],[rafael@laboissiere.net])
+AC_INIT([libvc],[013],[rafael@laboissiere.net])
 LIBVC_ABI_VERSION=1:4:1
 AC_SUBST(LIBVC_ABI_VERSION)
 
@@ -10,7 +10,7 @@ AC_SUBST(LIBVC_ABI_VERSION)
 AM_INIT_AUTOMAKE
 AC_PREREQ([2.72])
 AC_COPYRIGHT([Copyright (C) 2003  Andrew Hsu
-Copyright (C) 2017, 2019-2022 Rafael Laboissière])
+Copyright (C) 2017, 2019-2022, 2026 Rafael Laboissière])
 AC_REVISION($Revision: 1.3 $)
 AC_CONFIG_SRCDIR([src/vc.c])
 AC_CONFIG_MACRO_DIRS([m4])
