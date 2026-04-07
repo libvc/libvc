@@ -8,7 +8,7 @@ AC_SUBST(LIBVC_ABI_VERSION)
 
 ### Main definitions
 AM_INIT_AUTOMAKE
-AC_PREREQ([2.71])
+AC_PREREQ([2.72])
 AC_COPYRIGHT([Copyright (C) 2003  Andrew Hsu
 Copyright (C) 2017, 2019-2022 Rafael Laboissière])
 AC_REVISION($Revision: 1.3 $)
