@@ -18,7 +18,17 @@ AC_CONFIG_MACRO_DIRS([m4])
 ### Checks for programs.
 AC_PROG_CC
 AC_PROG_LEX([noyywrap])
+if test "$LEX" = ":" ; then
+    AC_MSG_ERROR([LEX program not found])
+fi
 AC_PROG_YACC
+dnl For some strange reason, if neither bison of byacc are found, the YACC
+dnl variable is set to "yacc", even if this program does not exist in the
+dnl system.
+AC_CHECK_PROG(have_yacc,$YACC,yes,no)
+if test "$have_yacc" = no ; then
+    AC_MSG_ERROR([YACC program not found])
+fi
 LT_INIT
 AC_CHECK_PROG(have_shunit2,shunit2,yes)
 AM_CONDITIONAL([HAVE_SHUNIT2], [test x$have_shunit2 = xyes])
